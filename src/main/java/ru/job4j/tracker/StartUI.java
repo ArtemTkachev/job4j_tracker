@@ -21,5 +21,8 @@ public class StartUI {
         System.out.println(Arrays.toString(tracker.findByName("second")));
         Boolean result = tracker.replace(2, new Item("third2"));
         System.out.println(Arrays.toString(tracker.findAll()));
+        Boolean res = tracker.delete(2);
+        System.out.println(Arrays.toString(tracker.findAll()));
+
     }
 }
