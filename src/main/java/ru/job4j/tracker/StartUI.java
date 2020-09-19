@@ -19,5 +19,7 @@ public class StartUI {
         System.out.println(tracker.findById(3));
         System.out.println(Arrays.toString(tracker.findAll()));
         System.out.println(Arrays.toString(tracker.findByName("second")));
+        Boolean result = tracker.replace(2, new Item("third2"));
+        System.out.println(Arrays.toString(tracker.findAll()));
     }
 }
