@@ -8,70 +8,26 @@ public class StartUI {
 
     public void init(Input input, Tracker tracker) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String ls = System.lineSeparator();
         boolean run = true;
         while (run) {
             this.showMenu();
             int select = input.askInt("Select: ");
             if (select == 0) {
-                System.out.println("=== Create a new Item ===");
-                String name = input.askStr("Enter name: ");
-                tracker.add(new Item(name));
-                System.out.println("=== Item \"" + name + "\" was created ===" + ls);
+                StartUI.createItem(input, tracker);
             } else if (select == 1) {
-                System.out.println("=== Show all items ===");
-                Item[] items = tracker.findAll();
-                StringBuilder sb = new StringBuilder();
-                for (Item item : items) {
-                    sb.append("ID:" + item.getId() +
-                            " NAME:" + item.getName() +
-                            " CREATED:" + item.getCreated().format(formatter) + ls);
-                }
-                System.out.println(sb.length() == 0 ? "No items" + ls : sb);
+                StartUI.showAllItems(input, tracker, formatter);
             } else if (select == 2) {
-                System.out.println("=== Edit item ===");
-                int id = input.askInt("Enter ID: ");
-                String name = input.askStr("Enter NAME: ");
-                if (tracker.replace(id, new Item(name))) {
-                    System.out.println("=== Item ID:" + id + " was edited with NAME:" + name + " ===" + ls);
-                } else {
-                    System.out.println("=== Item ID:" + id + " is not found ===" + ls);
-                }
+                StartUI.replaceItem(input, tracker);
             } else if (select == 3) {
-                System.out.println("=== Delete the item ===");
-                int id = input.askInt("Enter ID: ");
-                if (tracker.delete(id)) {
-                    System.out.println("=== Item ID:" + id + " was deleted ===" + ls);
-                } else {
-                    System.out.println("=== ID:" + id + " is not found ===" + ls);
-                }
+                StartUI.deleteItem(input, tracker);
             } else if (select == 4) {
-                System.out.println("=== Find item by ID ===");
-                int id = input.askInt("Enter ID: ");
-                Item item = tracker.findById(id);
-                if (item != null) {
-                    System.out.println("ID:" + item.getId() +
-                            " NAME:" + item.getName() +
-                            " CREATED:" + item.getCreated().format(formatter) + ls);
-                } else {
-                    System.out.println("=== Item ID:" + id + " is not found ===" + ls);
-                }
+                StartUI.findItemByID(input, tracker, formatter);
             } else if (select == 5) {
-                System.out.println("=== Find items by name ===");
-                String name = input.askStr("Enter NAME: ");
-                Item[] items = tracker.findByName(name);
-                StringBuilder sb = new StringBuilder();
-                for (Item item : items) {
-                    if (item.getName().equals(name)) {
-                        sb.append("ID:" + item.getId() +
-                                " NAME:" + item.getName() +
-                                " CREATED:" + item.getCreated().format(formatter) + ls);
-                    }
-                }
-                System.out.println(sb.length() == 0 ? "No items with NAME:" + name + ls : sb);
+                StartUI.findItemsByName(input, tracker, formatter);
             } else if (select == 6) {
                 run = false;
             }
+            System.out.println();
         }
     }
 
@@ -86,6 +42,74 @@ public class StartUI {
                 "5. Find items by name" + ls +
                 "6. Exit Program" + ls);
         System.out.print(sb);
+    }
+
+    public static void createItem(Input input, Tracker tracker) {
+        System.out.println("=== Create a new Item ===");
+        String name = input.askStr("Enter name: ");
+        tracker.add(new Item(name));
+        System.out.println("=== Item \"" + name + "\" was created ===");
+    }
+
+    public static void showAllItems(Input input, Tracker tracker, DateTimeFormatter formatter) {
+        System.out.println("=== Show all items ===");
+        Item[] items = tracker.findAll();
+        StringBuilder sb = new StringBuilder();
+        for (Item item : items) {
+            sb.append("ID:" + item.getId() +
+                    " NAME:" + item.getName() +
+                    " CREATED:" + item.getCreated().format(formatter));
+        }
+        System.out.println(sb.length() == 0 ? "No items" : sb);
+    }
+
+    public static void replaceItem(Input input, Tracker tracker) {
+        System.out.println("=== Edit item ===");
+        int id = input.askInt("Enter ID: ");
+        String name = input.askStr("Enter NAME: ");
+        if (tracker.replace(id, new Item(name))) {
+            System.out.println("=== Item ID:" + id + " was edited with NAME:" + name + " ===");
+        } else {
+            System.out.println("=== Item ID:" + id + " is not found ===");
+        }
+    }
+
+    public static void deleteItem(Input input, Tracker tracker) {
+        System.out.println("=== Delete the item ===");
+        int id = input.askInt("Enter ID: ");
+        if (tracker.delete(id)) {
+            System.out.println("=== Item ID:" + id + " was deleted ===");
+        } else {
+            System.out.println("=== ID:" + id + " is not found ===");
+        }
+    }
+
+    public static void findItemByID(Input input, Tracker tracker, DateTimeFormatter formatter) {
+        System.out.println("=== Find item by ID ===");
+        int id = input.askInt("Enter ID: ");
+        Item item = tracker.findById(id);
+        if (item != null) {
+            System.out.println("ID:" + item.getId() +
+                    " NAME:" + item.getName() +
+                    " CREATED:" + item.getCreated().format(formatter));
+        } else {
+            System.out.println("=== Item ID:" + id + " is not found ===");
+        }
+    }
+
+    public static void findItemsByName(Input input, Tracker tracker, DateTimeFormatter formatter) {
+        System.out.println("=== Find items by name ===");
+        String name = input.askStr("Enter NAME: ");
+        Item[] items = tracker.findByName(name);
+        StringBuilder sb = new StringBuilder();
+        for (Item item : items) {
+            if (item.getName().equals(name)) {
+                sb.append("ID:" + item.getId() +
+                        " NAME:" + item.getName() +
+                        " CREATED:" + item.getCreated().format(formatter));
+            }
+        }
+        System.out.println(sb.length() == 0 ? "No items with NAME:" + name : sb);
     }
 
     public static void main(String[] args) {
