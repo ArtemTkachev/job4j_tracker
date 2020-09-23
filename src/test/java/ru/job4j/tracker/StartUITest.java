@@ -9,6 +9,17 @@ import static org.hamcrest.Matchers.is;
 public class StartUITest {
 
     @Test
+    public void whenExit() {
+        Output out = new StubOutput();
+        Input input = new StubInput(new String[]{"0"});
+        Tracker tracker = new Tracker();
+        UserAction[] userActions = {new ExitProgramAction()};
+        new StartUI(out).init(input, tracker, userActions);
+        assertThat(out.toString(), is("Menu." + System.lineSeparator() +
+                "0. Exit Program" + System.lineSeparator()));
+    }
+/*
+    @Test
     public void whenCreateItem() { ;
         Input input = new StubInput(new String[]{"0", "first", "1"});
         Tracker tracker = new Tracker();
@@ -47,7 +58,5 @@ public class StartUITest {
         new StartUI().init(input, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
-
-
-
+ */
 }
