@@ -10,14 +10,11 @@ public class FindItemByIdAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         System.out.println("=== " + this.name() + " ===");
         int id = input.askInt("Enter ID: ");
         Item item = tracker.findById(id);
         if (item != null) {
-            System.out.println("ID:" + item.getId() +
-                    " NAME:" + item.getName() +
-                    " CREATED:" + item.getCreated().format(formatter));
+            System.out.println(item);
         } else {
             System.out.println("=== Item ID:" + id + " is not found ===");
         }
