@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+import ru.job4j.tracker.TrackerSTEnumEagerLoad;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;
