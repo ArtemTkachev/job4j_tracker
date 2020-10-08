@@ -3,6 +3,8 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -37,7 +39,7 @@ public class ValidateInputTest {
                 new String[] {"zero", "0"}
         );
         new StartUI(out).init(new ValidateInput(out, input), new Tracker(),
-                new UserAction[]{new ExitProgramAction()});
+                List.of(new ExitProgramAction()));
         assertThat(out.toString(), is(
                 String.format(
                         "Menu.%n"
