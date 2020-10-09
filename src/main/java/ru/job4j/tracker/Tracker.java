@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Tracker {
-    public final List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
 
     private int indexOf(int id) {
@@ -50,7 +50,7 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return List.copyOf(items);
+        return items;
     }
 
     public List<Item> findByName(String name) {
