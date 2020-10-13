@@ -18,7 +18,7 @@ public class ItemTest {
         Item fourth = new Item("fourth");
         List<Item> items = Arrays.asList(first, second, third, fourth);
         Collections.sort(items, new SortByItemName());
-        assertThat(items.get(1), is(fourth));
+        assertThat(items,is(Arrays.asList(first, fourth, second, third)));
     }
 
     @Test
@@ -29,6 +29,6 @@ public class ItemTest {
         Item fourth = new Item("fourth");
         List<Item> items = Arrays.asList(first, second, third, fourth);
         Collections.sort(items, new SortByNameItemDesc());
-        assertThat(items.get(1), is(second));
+        assertThat(items,is(Arrays.asList(third, second, fourth, first)));
     }
 }
