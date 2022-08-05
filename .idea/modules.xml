@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/job4j_tracker.iml" filepath="$PROJECT_DIR$/.idea/job4j_tracker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/job4j_tracker-master/tracker.iml" filepath="$PROJECT_DIR$/job4j_tracker-master/tracker.iml" />
     </modules>
   </component>
 </project>
