@@ -10,7 +10,6 @@ public class Tracker {
     public Item add(Item item) {
         item.setId(ids++);
         items[size++] = item;
-        UID.abs(3.14);
         return item;
     }
 
