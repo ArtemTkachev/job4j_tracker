@@ -1,6 +1,5 @@
 package ru.job4j.tracker;
 
-import java.rmi.server.UID;
 import java.util.Arrays;
 
 public class Tracker {
