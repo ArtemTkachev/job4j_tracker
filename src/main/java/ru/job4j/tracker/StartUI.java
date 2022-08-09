@@ -74,10 +74,9 @@ public class StartUI {
                 } else {
                     System.out.println("Items with the name: " + name + " not found.");
                 }
-            } else {
+            } else if (select == 6) {
                 run = false;
             }
-
         }
     }
 
